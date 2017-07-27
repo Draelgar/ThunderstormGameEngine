@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Graphics Engine">
+      <UniqueIdentifier>{787f1dcd-57ea-428c-9322-8542a2a2c6ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics Engine">
+      <UniqueIdentifier>{36a2ff7d-5327-4839-a698-b0f9690b77fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader Files">
+      <UniqueIdentifier>{e28c4d06-629c-457a-b611-45ce0c3613b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader Files\Vertex Shaders">
+      <UniqueIdentifier>{09cb11df-e192-4ca4-967a-216981c360fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scene Graph Nodes">
+      <UniqueIdentifier>{f838fa33-2c99-4f97-9b4c-fa7c7f09e9a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene Graph Nodes">
+      <UniqueIdentifier>{756006e9-6496-4756-9695-5e071bc277ab}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\Graphics Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="DX3D11Renderer.cpp">
+      <Filter>Source Files\Graphics Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry.cpp">
+      <Filter>Source Files\Graphics Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsManager.cpp">
+      <Filter>Source Files\Graphics Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\Graphics Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessVisitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraphNode.cpp">
+      <Filter>Source Files\Scene Graph Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="GroupNode.cpp">
+      <Filter>Source Files\Scene Graph Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformNode.cpp">
+      <Filter>Source Files\Scene Graph Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraNode.cpp">
+      <Filter>Source Files\Scene Graph Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryNode.cpp">
+      <Filter>Source Files\Scene Graph Nodes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\Graphics Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="DX3D11Renderer.h">
+      <Filter>Header Files\Graphics Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry.h">
+      <Filter>Header Files\Graphics Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsManager.h">
+      <Filter>Header Files\Graphics Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\Graphics Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessVisitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraphNode.h">
+      <Filter>Header Files\Scene Graph Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="GroupNode.h">
+      <Filter>Header Files\Scene Graph Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformNode.h">
+      <Filter>Header Files\Scene Graph Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraNode.h">
+      <Filter>Header Files\Scene Graph Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryNode.h">
+      <Filter>Header Files\Scene Graph Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="ColorPS.hlsl">
+      <Filter>Shader Files\Vertex Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="ColorVS.hlsl">
+      <Filter>Shader Files\Vertex Shaders</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
