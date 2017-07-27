@@ -107,7 +107,10 @@ namespace ts
 			};
 
 			/** Compare two vectors. **/
-			inline bool operator==(const Float3 vector) const { if (mX == vector.X() && mY == vector.Y() && mZ == vector.Z()) return true; };
+			inline bool operator==(const Float3 vector) const 
+			{
+				return fabsf(mX - vector.X()) < 1.0e-07f && fabsf(mY - vector.Y()) < 1.0e-07f && fabsf(mZ - vector.Z()) < 1.0e-07f;
+			};
 			/** Compare two vectors. **/
 			inline bool operator!=(const Float3 vector) const { return !((*this) == vector); };
 

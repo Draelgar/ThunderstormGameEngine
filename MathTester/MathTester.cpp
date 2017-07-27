@@ -9,14 +9,11 @@
 using namespace ts::math;
 using namespace std;
 
-// TODO: Add proper comparer to all vectors!
+// TODO: Test the new comparer for all vectors and make sure to swap all float comparrisions to the function below!
 bool compare(const float a, const float b)
 {
-	const float limit = 0.00000001;
-	if (a <= b + limit && a >= b - limit)
-		return true;
-	else
-		return false;
+	const float limit = 1.0e-07f;
+	return fabsf(a - b) < limit;
 }
 
 bool Float2Test()

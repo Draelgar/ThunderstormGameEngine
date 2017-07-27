@@ -67,7 +67,10 @@ namespace ts
 			inline Float2 operator/(const float scalar) const { Float2 result((*this)); result /= scalar; return result; };
 
 			/** Compare two vectors. **/
-			inline bool operator==(const Float2 vector) const { if (mX == vector.X() && mY == vector.Y()) return true; };
+			inline bool operator==(const Float2 vector) const 
+			{
+				return fabsf(mX - vector.X()) < 1.0e-07f && fabsf(mY - vector.Y() < 1.0e-07f);
+			};
 			/** Compare two vectors. **/
 			inline bool operator!=(const Float2 vector) const { return !((*this) == vector); };
 
