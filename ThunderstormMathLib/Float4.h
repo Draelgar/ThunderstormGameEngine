@@ -15,82 +15,111 @@ namespace ts
 		{
 		protected:
 			/** The actual data. **/
-			float mVector[4];
+			union
+			{
+				struct
+				{
+					float mX;
+					float mY;
+					float mZ;
+					float mW;
+				};
+
+				float mVector[4];
+			};
 
 		public:
 			/** Default Constructor. All values are set to zero. **/
-			Float4() { mVector[0] = 0.0f; mVector[1] = 0.0f; mVector[2] = 0.0f; mVector[3] = 0.0f; };
+			Float4() { mX = 0.0f; mY = 0.0f; mZ = 0.0f; mW = 0.0f; };
 			/** Create a new vector with all values set to the same. **/
-			explicit Float4(float value) { mVector[0] = value; mVector[1] = value; mVector[2] = value; mVector[3] = value; };
+			explicit Float4(float value) { mX = value; mY = value; mZ = value; mW = value; };
 			/** Create a new vector with the given data. **/
-			explicit Float4(float x, float y, float z, float w) { mVector[0] = x; mVector[1] = y; mVector[2] = z; mVector[3] = w; };
+			explicit Float4(float x, float y, float z, float w) { mX = x; mY = y; mZ = z; mW = w; };
 			/** Create a new vector with the given data. **/
-			explicit Float4(Float2 vector, float z, float w) { mVector[0] = vector.X(); mVector[1] = vector.Y(); mVector[2] = z; mVector[3] = w; };
+			explicit Float4(Float2 vector, float z, float w) { mX = vector.X(); mY = vector.Y(); mZ = z; mW = w; };
 			/** Create a new vector with the given data. **/
-			explicit Float4(Float3 vector, float w) { mVector[0] = vector.X(); mVector[1] = vector.Y(); mVector[2] = vector.Z(); mVector[3] = w; };
+			explicit Float4(Float3 vector, float w) { mX = vector.X(); mY = vector.Y(); mZ = vector.Z(); mW = w; };
 
 
 			/** Get the i'th element. **/
 			inline float operator[](const unsigned short index) const { return mVector[index]; };
 			/** Set the i'th element to the given value. **/
 			inline void Set(const unsigned short index, const float value) { mVector[index] = value; };
+			/** Set all elements to the given value. **/
+			inline void Set(const float value) { mX = value; mY = value; mZ = value; mW = value; };
 
 			/** Get the X-coordinate. **/
-			inline float X() const { return mVector[0]; };
+			inline float X() const { return mX; };
 			/** Set the X-coordinate. **/
-			inline void X(const float value) { mVector[0] = value; };
+			inline void X(const float value) { mX = value; };
 
 			/** Get the Y-coordinate. **/
-			inline float Y() const { return mVector[1]; };
+			inline float Y() const { return mY; };
 			/** Set the Y-coordinate. **/
-			inline void Y(const float value) { mVector[1] = value; };
+			inline void Y(const float value) { mY = value; };
 
 			/** Get the Z-coordinate. **/
-			inline float Z() const { return mVector[2]; };
+			inline float Z() const { return mZ; };
 			/** Set the Z-coordinate. **/
-			inline void Z(const float value) { mVector[2] = value; };
+			inline void Z(const float value) { mZ = value; };
 
 			/** Get the W-coordinate. **/
-			inline float W() const { return mVector[3]; };
+			inline float W() const { return mW; };
 			/** Set the W-coordinate. **/
-			inline void W(const float value) { mVector[3] = value; };
+			inline void W(const float value) { mW = value; };
 
-			inline Float2 XY() const { return Float2(mVector[0], mVector[1]); };
-			inline Float2 YZ() const { return Float2(mVector[1], mVector[2]); };
-			inline Float2 XZ() const { return Float2(mVector[0], mVector[2]); };
-			inline Float2 XW() const { return Float2(mVector[0], mVector[3]); };
-			inline Float2 YW() const { return Float2(mVector[1], mVector[3]); };
-			inline Float2 ZW() const { return Float2(mVector[2], mVector[3]); };
+			/** Get the X and Y compinents of the vector. **/
+			inline Float2 XY() const { return Float2(mX, mY); };
+			/** Get the Y and Z compinents of the vector. **/
+			inline Float2 YZ() const { return Float2(mY, mZ); };
+			/** Get the X and Z compinents of the vector. **/
+			inline Float2 XZ() const { return Float2(mX, mZ); };
+			/** Get the X and W compinents of the vector. **/
+			inline Float2 XW() const { return Float2(mX, mW); };
+			/** Get the Y and W compinents of the vector. **/
+			inline Float2 YW() const { return Float2(mY, mW); };
+			/** Get the Z and W compinents of the vector. **/
+			inline Float2 ZW() const { return Float2(mZ, mW); };
 
-			inline Float3 XYZ() const { return Float3(mVector[0], mVector[1], mVector[2]); };
-			inline Float3 XYW() const { return Float3(mVector[0], mVector[1], mVector[3]); };
-			inline Float3 XZW() const { return Float3(mVector[0], mVector[2], mVector[3]); };
-			inline Float3 YZW() const { return Float3(mVector[1], mVector[2], mVector[3]); };
+			/** Get the X, Y and Z components of the vector. **/
+			inline Float3 XYZ() const { return Float3(mX, mY, mZ); };
+			/** Get the X, Y and W components of the vector. **/
+			inline Float3 XYW() const { return Float3(mX, mY, mW); };
+			/** Get the X, Z and W components of the vector. **/
+			inline Float3 XZW() const { return Float3(mX, mZ, mW); };
+			/** Get the Y, Z and W components of the vector. **/
+			inline Float3 YZW() const { return Float3(mY, mZ, mW); };
 
 			/** Get the length of this vector. **/
-			inline float Length() const { return sqrtf(powf(mVector[0], 2.0f) + powf(mVector[1], 2.0f) + powf(mVector[2], 2.0f) + powf(mVector[3], 2.0f)); };
+			inline float Length() const { return sqrtf(powf(mX, 2.0f) + powf(mY, 2.0f) + powf(mZ, 2.0f) + powf(mW, 2.0f)); };
 
+			/** Multiply by scalar. **/
 			inline void operator*=(const float scalar)
 			{
-				mVector[0] *= scalar;
-				mVector[1] *= scalar;
-				mVector[2] *= scalar;
-				mVector[3] *= scalar;
+				mX *= scalar;
+				mY *= scalar;
+				mZ *= scalar;
+				mW *= scalar;
 			};
+			/** Multiply by scalar. **/
 			inline Float4 operator*(const float scalar) const
 			{
 				Float4 result((*this));
 				result *= scalar;
 				return result;
 			};
+			/** Multiply by scalar. **/
+			inline friend Float4 operator*(const float scalar, const Float4 vector) { return vector * scalar; };
 
+			/** Divide by scalar; **/
 			inline void operator/=(const float scalar)
 			{
-				mVector[0] /= scalar;
-				mVector[1] /= scalar;
-				mVector[2] /= scalar;
-				mVector[3] /= scalar;
+				mX /= scalar;
+				mY /= scalar;
+				mZ /= scalar;
+				mW /= scalar;
 			};
+			/** Divide by scalar; **/
 			inline Float4 operator/(const float scalar) const
 			{
 				Float4 result((*this));
@@ -98,16 +127,20 @@ namespace ts
 				return result;
 			};
 
-			inline bool operator==(const Float4 vector) const { if (mVector[0] == vector.X() && mVector[1] == vector.Y() && mVector[2] == vector.Z() && mVector[3] == vector.W()) return true; };
+			/** Compare two vectors. **/
+			inline bool operator==(const Float4 vector) const { if (mX == vector.X() && mY == vector.Y() && mZ == vector.Z() && mW == vector.W()) return true; };
+			/** Compare two vectors. **/
 			inline bool operator!=(const Float4 vector) const { return !((*this) == vector); };
 
+			/** Add two vectors together. **/
 			inline void operator+=(const Float4 vector)
 			{
-				mVector[0] += vector.X();
-				mVector[1] += vector.Y();
-				mVector[2] += vector.Z();
-				mVector[3] += vector.W();
+				mX += vector.X();
+				mY += vector.Y();
+				mZ += vector.Z();
+				mW += vector.W();
 			};
+			/** Add two vectors together. **/
 			inline Float4 operator+(const Float4 vector) const
 			{
 				Float4 result(*this);
@@ -115,13 +148,15 @@ namespace ts
 				return result;
 			};
 
+			/** Subtract a vector from another. **/
 			inline void operator-=(const Float4 vector)
 			{
-				mVector[0] -= vector.X();
-				mVector[1] -= vector.Y();
-				mVector[2] -= vector.Z();
-				mVector[2] -= vector.W();
+				mX -= vector.X();
+				mY -= vector.Y();
+				mZ -= vector.Z();
+				mZ -= vector.W();
 			};
+			/** Subtract a vector from another. **/
 			inline Float4 operator-(const Float4 vector) const
 			{
 				Float4 result(*this);
@@ -146,15 +181,15 @@ namespace ts
 			};
 
 			/** Calculate the dot product of the two vectors. **/
-			inline float Dot(Float4 vector) const { return (mVector[0] * vector.X()) + (mVector[1] * vector.Y()) + (mVector[2] * vector.Z()) + (mVector[3] * vector.W()); };
+			inline float Dot(Float4 vector) const { return (mX * vector.X()) + (mY * vector.Y()) + (mZ * vector.Z()) + (mW * vector.W()); };
 
 			/** Calculate the cross product of the two vectors. **/
 			inline Float4 Cross(Float4 vector) const
 			{
-				float x = (mVector[3] * vector.Z()) - (mVector[1] * vector.Z());
-				float y = (mVector[0] * vector.W()) - (mVector[2] * vector.W());
-				float z = (mVector[1] * vector.X()) - (mVector[3] * vector.X());
-				float w = (mVector[2] * vector.Y()) - (mVector[0] * vector.Y());
+				float x = (mW * vector.Z()) - (mY * vector.Z());
+				float y = (mX * vector.W()) - (mZ * vector.W());
+				float z = (mY * vector.X()) - (mW * vector.X());
+				float w = (mZ * vector.Y()) - (mX * vector.Y());
 				return Float4(x, y, z, w);
 			};
 		};
