@@ -5,19 +5,21 @@
 ******************************************************************************************/
 #pragma once
 
-#include<math.h>
+#include <math.h>
+#include "Constants.h"
 
 namespace ts
 {
 	namespace math
-	{
+	{	
+		/** This class represents a floating-point vector in 2D space. **/
 		class Float2
 		{
 		protected:
 			/** The actual data. **/
 			union 
 			{
-				struct 
+				struct
 				{
 					float mX;
 					float mY;
@@ -28,11 +30,25 @@ namespace ts
 
 		public:
 			/** Default Constructor.All values are set to zero. **/
-			Float2() { mX = 0.0f; mY = 0.0f; };
+			Float2() 
+			{ 
+				mX = 0.0f; 
+				mY = 0.0f; 
+			};
+
 			/** Create a new vector with all values set to the same. **/
-			explicit Float2(float value) { mX = value; mY = value; };
+			explicit Float2(float value) 
+			{ 
+				mX = value; 
+				mY = value; 
+			};
+
 			/** Create a new vector with the given data. **/
-			explicit Float2(float x, float y) { mX = x; mY = y; };
+			explicit Float2(float x, float y) 
+			{ 
+				mX = x; 
+				mY = y; 
+			};
 
 			/** Get the i'th element. **/
 			inline float operator[](const unsigned short index) const { return mVector[index]; };
@@ -52,37 +68,89 @@ namespace ts
 			inline void Y(const float value) { mY = value; };
 
 			/** Get the length of this vector. **/
-			inline float Length() const { return sqrtf(powf(mX, 2.0f) + powf(mY, 2.0f)); };
+			inline float Length() const 
+			{ 
+				return sqrtf(powf(mX, 2.0f) + powf(mY, 2.0f)); 
+			};
 
 			/** Multiply vector by scalar. **/
-			inline void operator*=(const float scalar) { mX *= scalar; mY *= scalar; };
+			inline void operator*=(const float scalar) 
+			{ 
+				mX *= scalar; 
+				mY *= scalar; 
+			};
+
 			/** Multiply vector by scalar. **/
-			inline Float2 operator*(const float scalar) const { Float2 result((*this)); result *= scalar; return result; };
+			inline Float2 operator*(const float scalar) const 
+			{	
+				Float2 result((*this)); 
+				result *= scalar; 
+				return result; 
+			};
+
 			/** Multiply vector by scalar. **/
-			inline friend Float2 operator*(const float scalar, const Float2 vector) { return vector * scalar; };
+			inline friend Float2 operator*(const float scalar, const Float2 vector) 
+			{ 
+				return vector * scalar; 
+			};
 
 			/** Divide vector by scalar. **/
-			inline void operator/=(const float scalar) { mX /= scalar; mY /= scalar; };
+			inline void operator/=(const float scalar) 
+			{ 
+				mX /= scalar; 
+				mY /= scalar; 
+			};
+
 			/** Divide vector by scalar. **/
-			inline Float2 operator/(const float scalar) const { Float2 result((*this)); result /= scalar; return result; };
+			inline Float2 operator/(const float scalar) const 
+			{ 
+				Float2 result((*this)); 
+				result /= scalar; 
+				return result; 
+			};
 
 			/** Compare two vectors. **/
 			inline bool operator==(const Float2 vector) const 
 			{
-				return fabsf(mX - vector.X()) < 1.0e-07f && fabsf(mY - vector.Y() < 1.0e-07f);
+				return fabsf(mX - vector.X()) < MATH_FLOAT_PRECISION && 
+					fabsf(mY - vector.Y() < MATH_FLOAT_PRECISION);
 			};
+
 			/** Compare two vectors. **/
-			inline bool operator!=(const Float2 vector) const { return !((*this) == vector); };
+			inline bool operator!=(const Float2 vector) const 
+			{ 
+				return !((*this) == vector); 
+			};
 
 			/** Add two vectors together.**/
-			inline void operator+=(const Float2 vector) { mX += vector.X(); mY += vector.Y(); };
+			inline void operator+=(const Float2 vector) 
+			{ 
+				mX += vector.X(); 
+				mY += vector.Y(); 
+			};
+
 			/** Add two vectors together.**/
-			inline Float2 operator+(const Float2 vector) const { Float2 result(*this); result += vector; return result; };
+			inline Float2 operator+(const Float2 vector) const 
+			{ 
+				Float2 result(*this); 
+				result += vector; 
+				return result; 
+			};
 
 			/** Subtract a vector from another. **/
-			inline void operator-=(const Float2 vector) { mX -= vector.X(); mY -= vector.Y(); };
+			inline void operator-=(const Float2 vector) 
+			{ 
+				mX -= vector.X(); 
+				mY -= vector.Y(); 
+			};
+
 			/** Subtract a vector from another. **/
-			inline Float2 operator-(const Float2 vector) const { Float2 result(*this); result -= vector; return result; };
+			inline Float2 operator-(const Float2 vector) const 
+			{ 
+				Float2 result(*this); 
+				result -= vector; 
+				return result; 
+			};
 
 			/** Normalize the vector and return its former length. **/
 			inline float Normalize()
@@ -93,12 +161,19 @@ namespace ts
 			};
 
 			/** Get a normalized version of this vector. **/
-			inline Float2 Normalized() const { Float2 unitVector(*this); unitVector.Normalize(); return unitVector; };
+			inline Float2 Normalized() const 
+			{ 
+				float length = Length();
+				return (*this) / length;
+			};
 
 			/** Calculate the Dot product of two vectors. **/
-			inline float Dot(Float2 vector) const { return (mX * vector.X()) + (mY * vector.Y()); };
+			inline float Dot(Float2 vector) const 
+			{ 
+				return (mX * vector.X()) + (mY * vector.Y()); 
+			};
 
-			// Cross product for a 2D vector is redundant, as it will always return zero.
+			// Cross product for a 2D vector is redundant, as it will always result in a zero vector.
 		};
 	}
 }

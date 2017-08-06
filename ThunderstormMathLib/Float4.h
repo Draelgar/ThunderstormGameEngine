@@ -11,6 +11,7 @@ namespace ts
 {
 	namespace math
 	{
+		/** This class represents a floating-point vector in 4D space. **/
 		class Float4
 		{
 		protected:
@@ -30,15 +31,49 @@ namespace ts
 
 		public:
 			/** Default Constructor. All values are set to zero. **/
-			Float4() { mX = 0.0f; mY = 0.0f; mZ = 0.0f; mW = 0.0f; };
+			Float4() 
+			{ 
+				mX = 0.0f; 
+				mY = 0.0f; 
+				mZ = 0.0f; 
+				mW = 0.0f; 
+			};
+
 			/** Create a new vector with all values set to the same. **/
-			explicit Float4(float value) { mX = value; mY = value; mZ = value; mW = value; };
+			explicit Float4(float value) 
+			{ 
+				mX = value; 
+				mY = value; 
+				mZ = value; 
+				mW = value; 
+			};
+
 			/** Create a new vector with the given data. **/
-			explicit Float4(float x, float y, float z, float w) { mX = x; mY = y; mZ = z; mW = w; };
+			explicit Float4(float x, float y, float z, float w) 
+			{ 
+				mX = x; 
+				mY = y; 
+				mZ = z; 
+				mW = w; 
+			};
+
 			/** Create a new vector with the given data. **/
-			explicit Float4(Float2 vector, float z, float w) { mX = vector.X(); mY = vector.Y(); mZ = z; mW = w; };
+			explicit Float4(Float2 vector, float z, float w) 
+			{ 
+				mX = vector.X(); 
+				mY = vector.Y(); 
+				mZ = z; 
+				mW = w; 
+			};
+
 			/** Create a new vector with the given data. **/
-			explicit Float4(Float3 vector, float w) { mX = vector.X(); mY = vector.Y(); mZ = vector.Z(); mW = w; };
+			explicit Float4(Float3 vector, float w) 
+			{ 
+				mX = vector.X(); 
+				mY = vector.Y(); 
+				mZ = vector.Z(); 
+				mW = w; 
+			};
 
 
 			/** Get the i'th element. **/
@@ -91,7 +126,13 @@ namespace ts
 			inline Float3 YZW() const { return Float3(mY, mZ, mW); };
 
 			/** Get the length of this vector. **/
-			inline float Length() const { return sqrtf(powf(mX, 2.0f) + powf(mY, 2.0f) + powf(mZ, 2.0f) + powf(mW, 2.0f)); };
+			inline float Length() const 
+			{ 
+				return sqrtf(powf(mX, 2.0f) + 
+					powf(mY, 2.0f) + 
+					powf(mZ, 2.0f) + 
+					powf(mW, 2.0f)); 
+			};
 
 			/** Multiply by scalar. **/
 			inline void operator*=(const float scalar)
@@ -101,6 +142,7 @@ namespace ts
 				mZ *= scalar;
 				mW *= scalar;
 			};
+
 			/** Multiply by scalar. **/
 			inline Float4 operator*(const float scalar) const
 			{
@@ -108,8 +150,12 @@ namespace ts
 				result *= scalar;
 				return result;
 			};
+
 			/** Multiply by scalar. **/
-			inline friend Float4 operator*(const float scalar, const Float4 vector) { return vector * scalar; };
+			inline friend Float4 operator*(const float scalar, const Float4 vector) 
+			{ 
+				return vector * scalar; 
+			};
 
 			/** Divide by scalar; **/
 			inline void operator/=(const float scalar)
@@ -119,6 +165,7 @@ namespace ts
 				mZ /= scalar;
 				mW /= scalar;
 			};
+
 			/** Divide by scalar; **/
 			inline Float4 operator/(const float scalar) const
 			{
@@ -130,10 +177,17 @@ namespace ts
 			/** Compare two vectors. **/
 			inline bool operator==(const Float4 vector) const 
 			{
-				return fabsf(mX - vector.X()) < 1.0e-07f && fabsf(mY - vector.Y()) < 1.0e-07f && fabsf(mZ - vector.Z()) < 1.0e-07f && fabsf(mW - vector.W()) < 1.0e-07f;
+				return fabsf(mX - vector.X()) < MATH_FLOAT_PRECISION &&
+					fabsf(mY - vector.Y()) < MATH_FLOAT_PRECISION &&
+					fabsf(mZ - vector.Z()) < MATH_FLOAT_PRECISION &&
+					fabsf(mW - vector.W()) < MATH_FLOAT_PRECISION;
 			};
+
 			/** Compare two vectors. **/
-			inline bool operator!=(const Float4 vector) const { return !((*this) == vector); };
+			inline bool operator!=(const Float4 vector) const 
+			{ 
+				return !((*this) == vector); 
+			};
 
 			/** Add two vectors together. **/
 			inline void operator+=(const Float4 vector)
@@ -143,6 +197,7 @@ namespace ts
 				mZ += vector.Z();
 				mW += vector.W();
 			};
+
 			/** Add two vectors together. **/
 			inline Float4 operator+(const Float4 vector) const
 			{
@@ -157,8 +212,9 @@ namespace ts
 				mX -= vector.X();
 				mY -= vector.Y();
 				mZ -= vector.Z();
-				mZ -= vector.W();
+				mW -= vector.W();
 			};
+
 			/** Subtract a vector from another. **/
 			inline Float4 operator-(const Float4 vector) const
 			{
@@ -178,13 +234,18 @@ namespace ts
 			/** Get a normalized version of this vector. **/
 			inline Float4 Normalized() const
 			{
-				Float4 unitVector(*this);
-				unitVector.Normalize();
-				return unitVector;
+				float length = Length();
+				return (*this) / length;
 			};
 
 			/** Calculate the dot product of the two vectors. **/
-			inline float Dot(Float4 vector) const { return (mX * vector.X()) + (mY * vector.Y()) + (mZ * vector.Z()) + (mW * vector.W()); };
+			inline float Dot(Float4 vector) const 
+			{ 
+				return (mX * vector.X()) + 
+					(mY * vector.Y()) + 
+					(mZ * vector.Z()) + 
+					(mW * vector.W()); 
+			};
 
 			/** Calculate the cross product of the two vectors. **/
 			inline Float4 Cross(Float4 vector) const

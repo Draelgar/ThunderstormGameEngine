@@ -11,6 +11,7 @@ namespace ts
 {
 	namespace math
 	{
+		/** This clas represets a floating-point vector in 3D space. **/
 		class Float3
 		{
 		protected:
@@ -30,13 +31,36 @@ namespace ts
 
 		public:
 			/** Default Constructor.All values are set to zero. **/
-			Float3() { mX = 0.0f; mY = 0.0f; mZ = 0.0f; };
+			Float3() 
+			{ 
+				mX = 0.0f; 
+				mY = 0.0f; 
+				mZ = 0.0f; 
+			};
+
 			/** Create a new vector with all values set to the same. **/
-			explicit Float3(float value) { mX = value; mY = value; mZ = value; };
+			explicit Float3(float value) 
+			{ 
+				mX = value; 
+				mY = value; 
+				mZ = value; 
+			};
+
 			/** Create a new vector with the given data. **/
-			explicit Float3(float x, float y, float z) { mX = x; mY = y; mZ = z; };
+			explicit Float3(float x, float y, float z) 
+			{ 
+				mX = x; 
+				mY = y; 
+				mZ = z; 
+			};
+
 			/** Create a new vector with the given data. **/
-			explicit Float3(Float2 vector, float z) { mX = vector.X(); mY = vector.Y(); mZ = z; };
+			explicit Float3(Float2 vector, float z) 
+			{ 
+				mX = vector.X(); 
+				mY = vector.Y(); 
+				mZ = z; 
+			};
 
 
 			/** Get the i'th element. **/
@@ -69,7 +93,12 @@ namespace ts
 			inline Float2 XZ() const { return Float2(mX, mZ); };
 
 			/** Get the length of this vector. **/
-			inline float Length() const { return sqrtf(powf(mX, 2.0f) + powf(mY, 2.0f) + powf(mZ, 2.0f)); };
+			inline float Length() const 
+			{ 
+				return sqrtf(powf(mX, 2.0f) + 
+					powf(mY, 2.0f) + 
+					powf(mZ, 2.0f)); 
+			};
 
 			/** Multiply vector by scalar. **/
 			inline void operator*=(const float scalar)
@@ -78,6 +107,7 @@ namespace ts
 				mY *= scalar;
 				mZ *= scalar;
 			};
+
 			/** Multiply vector by scalar. **/
 			inline Float3 operator*(const float scalar) const
 			{
@@ -85,6 +115,7 @@ namespace ts
 				result *= scalar;
 				return result;
 			};
+
 			/** Multiply vector by scalar. **/
 			inline friend Float3 operator*(const float scalar, const Float3 vector)
 			{
@@ -98,6 +129,7 @@ namespace ts
 				mY /= scalar;
 				mZ /= scalar;
 			};
+
 			/** Divide vector by scalar. **/
 			inline Float3 operator/(const float scalar) const
 			{
@@ -109,10 +141,16 @@ namespace ts
 			/** Compare two vectors. **/
 			inline bool operator==(const Float3 vector) const 
 			{
-				return fabsf(mX - vector.X()) < 1.0e-07f && fabsf(mY - vector.Y()) < 1.0e-07f && fabsf(mZ - vector.Z()) < 1.0e-07f;
+				return fabsf(mX - vector.X()) < MATH_FLOAT_PRECISION &&
+					fabsf(mY - vector.Y()) < MATH_FLOAT_PRECISION &&
+					fabsf(mZ - vector.Z()) < MATH_FLOAT_PRECISION;
 			};
+
 			/** Compare two vectors. **/
-			inline bool operator!=(const Float3 vector) const { return !((*this) == vector); };
+			inline bool operator!=(const Float3 vector) const 
+			{ 
+				return !((*this) == vector); 
+			};
 
 			/** Add two vectors together. **/
 			inline void operator+=(const Float3 vector)
@@ -121,6 +159,7 @@ namespace ts
 				mY += vector.Y();
 				mZ += vector.Z();
 			};
+
 			/** Add two vectors together. **/
 			inline Float3 operator+(const Float3 vector) const
 			{
@@ -136,6 +175,7 @@ namespace ts
 				mY -= vector.Y();
 				mZ -= vector.Z();
 			};
+
 			/** Subtract a vector from another. **/
 			inline Float3 operator-(const Float3 vector) const
 			{
@@ -155,13 +195,17 @@ namespace ts
 			/** Get a normalized version of this vector. **/
 			inline Float3 Normalized() const
 			{
-				Float3 unitVector(*this);
-				unitVector.Normalize();
-				return unitVector;
+				float length = Length();		
+				return (*this) / length;
 			};
 
 			/** Calculate the dot product of the two vectors. **/
-			inline float Dot(Float3 vector) const { return (mX * vector.X()) + (mY * vector.Y()) + (mZ * vector.Z()); };
+			inline float Dot(Float3 vector) const 
+			{ 
+				return (mX * vector.X()) + 
+					(mY * vector.Y()) + 
+					(mZ * vector.Z()); 
+			};
 
 			/** Calculate the cross product of the two vectors. **/
 			inline Float3 Cross(Float3 vector) const
