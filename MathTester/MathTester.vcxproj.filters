@@ -33,6 +33,9 @@
     <ClInclude Include="Float4Tester.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MatrixTester.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -48,6 +51,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Float4Tester.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MatrixTester.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

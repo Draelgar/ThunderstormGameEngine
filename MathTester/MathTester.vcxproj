@@ -154,6 +154,7 @@
     <ClInclude Include="Float2Tester.h" />
     <ClInclude Include="Float3Tester.h" />
     <ClInclude Include="Float4Tester.h" />
+    <ClInclude Include="MatrixTester.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -162,6 +163,7 @@
     <ClCompile Include="Float3Tester.cpp" />
     <ClCompile Include="Float4Tester.cpp" />
     <ClCompile Include="MathTester.cpp" />
+    <ClCompile Include="MatrixTester.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

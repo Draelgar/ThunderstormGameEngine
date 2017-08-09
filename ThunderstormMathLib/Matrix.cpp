@@ -205,22 +205,22 @@ Matrix Matrix::Inverse() const
 void Matrix::Orthonormalize()
 {
 	// First row.
-	float scale = sqrtf(powf(a00(), 2.0f) + powf(a01(), 2.0f) + powf(a02(), 2.0f));
-	a00(a00() / scale);
-	a01(a01() / scale);
-	a02(a02() / scale);
+	float scale = sqrtf(powf(mE00, 2.0f) + powf(mE01, 2.0f) + powf(mE02, 2.0f));
+	mE00 = mE00 / scale;
+	mE01 = mE01 / scale;
+	mE02 = mE02 / scale;
 
 	// Second row.
-	scale = sqrtf(powf(a10(), 2.0f) + powf(a11(), 2.0f) + powf(a12(), 2.0f));
-	a10(a10() / scale);
-	a11(a11() / scale);
-	a12(a12() / scale);
+	scale = sqrtf(powf(mE10, 2.0f) + powf(mE11, 2.0f) + powf(mE12, 2.0f));
+	mE10 = mE10 / scale;
+	mE11 = mE11 / scale;
+	mE12 = mE12 / scale;
 
 	// Third Row.
-	scale = sqrtf(powf(a20(), 2.0f) + powf(a21(), 2.0f) + powf(a22(), 2.0f));
-	a20(a20() / scale);
-	a21(a21() / scale);
-	a22(a22() / scale);
+	scale = sqrtf(powf(mE20, 2.0f) + powf(mE21, 2.0f) + powf(mE22, 2.0f));
+	mE20 = mE20 / scale;
+	mE21 = mE21 / scale;
+	mE22 = mE22 / scale;
 }
 
 Matrix Matrix::Rotation(Float4 rotation)
@@ -229,21 +229,21 @@ Matrix Matrix::Rotation(Float4 rotation)
 
 	// First row
 	// cos a + (1 - cos a)x^2; (1 - cos a)xy - zsin a; (1 - cos a)xz + ysin a
-	matrix.a00(cosf(rotation.W()) + ((1.0f - cosf(rotation.W())) * powf(rotation.X(), 2.0f)));
-	matrix.a01((1.0f - cosf(rotation.W())) * rotation.X() * rotation.Y() - (rotation.Z() * sinf(rotation.W())));
-	matrix.a02((1.0f - cosf(rotation.W())) * rotation.X() * rotation.Z() + (rotation.Y() * sinf(rotation.W())));
+	matrix.E00(cosf(rotation.W()) + ((1.0f - cosf(rotation.W())) * powf(rotation.X(), 2.0f)));
+	matrix.E01((1.0f - cosf(rotation.W())) * rotation.X() * rotation.Y() - (rotation.Z() * sinf(rotation.W())));
+	matrix.E02((1.0f - cosf(rotation.W())) * rotation.X() * rotation.Z() + (rotation.Y() * sinf(rotation.W())));
 
 	// Second row
 	// (1 - cos a)xy + zsin a; cos a + (1 - cos a)y^2; (1 - cos a)yz - xsin a
-	matrix.a10((1.0f - cosf(rotation.W())) * rotation.X() * rotation.Y() + (rotation.Z() * sinf(rotation.W())));
-	matrix.a11(cosf(rotation.W()) + ((1.0f - cosf(rotation.W())) * powf(rotation.Y(), 2.0f)));
-	matrix.a12((1.0f - cosf(rotation.W())) * rotation.Y() * rotation.Z() - (rotation.X() * sinf(rotation.W())));
+	matrix.E10((1.0f - cosf(rotation.W())) * rotation.X() * rotation.Y() + (rotation.Z() * sinf(rotation.W())));
+	matrix.E11(cosf(rotation.W()) + ((1.0f - cosf(rotation.W())) * powf(rotation.Y(), 2.0f)));
+	matrix.E12((1.0f - cosf(rotation.W())) * rotation.Y() * rotation.Z() - (rotation.X() * sinf(rotation.W())));
 
 	// Third row
 	// (1 - cos a)xz - ysin a; (1 - cos a)yz + xsin a; cos a + (1 - cos a)z^2
-	matrix.a20((1.0f - cosf(rotation.W())) * rotation.X() * rotation.Z() - (rotation.Y() * sinf(rotation.W())));
-	matrix.a21((1.0f - cosf(rotation.W())) * rotation.Y() * rotation.Z() + (rotation.X() * sinf(rotation.W())));
-	matrix.a22(cosf(rotation.W()) + ((1.0f - cosf(rotation.W())) * powf(rotation.Z(), 2.0f)));
+	matrix.E20((1.0f - cosf(rotation.W())) * rotation.X() * rotation.Z() - (rotation.Y() * sinf(rotation.W())));
+	matrix.E21((1.0f - cosf(rotation.W())) * rotation.Y() * rotation.Z() + (rotation.X() * sinf(rotation.W())));
+	matrix.E22(cosf(rotation.W()) + ((1.0f - cosf(rotation.W())) * powf(rotation.Z(), 2.0f)));
 
 	return matrix;
 }
@@ -251,43 +251,43 @@ Matrix Matrix::Rotation(Float4 rotation)
 void Matrix::UnifyScale()
 {
 	// Identify the smallest value.
-	float smallest = a00();
-	if (a11() < smallest)
-		smallest = a11();
-	if (a22() < smallest)
-		smallest = a22();
+	float smallest = mE00;
+	if (mE11 < smallest)
+		smallest = mE11;
+	if (mE22 < smallest)
+		smallest = mE22;
 
 	// Divide all scalars by the lowest value.
-	a00(a00() / smallest);
-	a01(a01() / smallest);
-	a02(a02() / smallest);
-	a03(a03() / smallest);
+	mE00 = mE00 / smallest;
+	mE01 = mE01 / smallest;
+	mE02 = mE02 / smallest;
+	mE03 = mE03 / smallest;
 }
 
 void Matrix::FromQuaternion(const Quaternion quaternion)
 {
 	// First row:
-	a00(1.0f - (2.0f * powf(quaternion.Y(), 2.0f)) - (2.0f * powf(quaternion.Z(), 2.0f)));
-	a01((2.0f * quaternion.X() * quaternion.Y()) - (2.0f * quaternion.Z() * quaternion.W()));
-	a02((2.0f * quaternion.X() * quaternion.Z()) + (2.0f * quaternion.Y() * quaternion.W()));
+	mE00 = 1.0f - (2.0f * powf(quaternion.Y(), 2.0f)) - (2.0f * powf(quaternion.Z(), 2.0f));
+	mE01 = (2.0f * quaternion.X() * quaternion.Y()) - (2.0f * quaternion.Z() * quaternion.W());
+	mE02 = (2.0f * quaternion.X() * quaternion.Z()) + (2.0f * quaternion.Y() * quaternion.W());
 
 	// Second row:
-	a10((2.0f * quaternion.X() * quaternion.Y()) + (2.0f * quaternion.Z() * quaternion.W()));
-	a11(1.0f - (2.0f * powf(quaternion.X(), 2.0f)) - (2.0f * powf(quaternion.Z(), 2.0f)));
-	a12((2.0f * quaternion.Y() * quaternion.Z()) - (2.0f * quaternion.X() * quaternion.W()));
+	mE10 = (2.0f * quaternion.X() * quaternion.Y()) + (2.0f * quaternion.Z() * quaternion.W());
+	mE11 = 1.0f - (2.0f * powf(quaternion.X(), 2.0f)) - (2.0f * powf(quaternion.Z(), 2.0f));
+	mE12 = (2.0f * quaternion.Y() * quaternion.Z()) - (2.0f * quaternion.X() * quaternion.W());
 
 	//Third row:
-	a20((2.0f * quaternion.X() * quaternion.Z()) - (2.0f * quaternion.Y() * quaternion.W()));
-	a21((2.0f * quaternion.Y() * quaternion.Z()) + (2.0f * quaternion.X() * quaternion.W()));
-	a22(1.0f - (2.0f * powf(quaternion.X(), 2.0f)) - (2.0f * powf(quaternion.Y(), 2.0f)));
+	mE20 = (2.0f * quaternion.X() * quaternion.Z()) - (2.0f * quaternion.Y() * quaternion.W());
+	mE21 = (2.0f * quaternion.Y() * quaternion.Z()) + (2.0f * quaternion.X() * quaternion.W());
+	mE22 = 1.0f - (2.0f * powf(quaternion.X(), 2.0f)) - (2.0f * powf(quaternion.Y(), 2.0f));
 }
 
 Quaternion Matrix::ToQuaternion() const
 {
-	float w = sqrtf(1.0f + a00() + a11() + a22()) / 2.0f;
-	float x = (a21() - a12()) / (4.0f * w);
-	float y = (a02() - a20()) / (4.0f * w);
-	float z = (a10() - a01()) / (4.0f * w);
+	float w = sqrtf(1.0f + E00() + E11() + E22()) / 2.0f;
+	float x = (mE21 - mE12) / (4.0f * w);
+	float y = (mE02 - mE20) / (4.0f * w);
+	float z = (mE10 - mE01) / (4.0f * w);
 
 	return Quaternion(x, y, z, w);
 }
@@ -296,13 +296,13 @@ Matrix Matrix::PerspectiveViewGL(const float left, const float right, const floa
 {
 	Matrix perspective = Identity();
 
-	perspective.a00((2.0f * near) / (right - left));
-	perspective.a02((right + left) / (right - left));
-	perspective.a11((2.0f * near) / (top - bottom));
-	perspective.a12((top + bottom) / (top - bottom));
-	perspective.a22(-((far + near) / (far - near)));
-	perspective.a23(-((2.0f * far * near) / (far - near)));
-	perspective.a32(-1.0f);
+	perspective.E00((2.0f * near) / (right - left));
+	perspective.E02((right + left) / (right - left));
+	perspective.E11((2.0f * near) / (top - bottom));
+	perspective.E12((top + bottom) / (top - bottom));
+	perspective.E22(-((far + near) / (far - near)));
+	perspective.E23(-((2.0f * far * near) / (far - near)));
+	perspective.E32(-1.0f);
 
 	return perspective;
 }
@@ -311,13 +311,13 @@ Matrix Matrix::PerspectiveViewDX(const float left, const float right, const floa
 {
 	Matrix perspective = Identity();
 
-	perspective.a00((2.0f * near) / (right - left));
-	perspective.a02(-((right + left) / (right - left)));
-	perspective.a11((2.0f * near) / (top - bottom));
-	perspective.a12(-((top + bottom) / (top - bottom)));
-	perspective.a22(far / (far - near));
-	perspective.a23(-((far * near) / (far - near)));
-	perspective.a32(1.0f);
+	perspective.E00((2.0f * near) / (right - left));
+	perspective.E02(-((right + left) / (right - left)));
+	perspective.E11((2.0f * near) / (top - bottom));
+	perspective.E12(-((top + bottom) / (top - bottom)));
+	perspective.E22(far / (far - near));
+	perspective.E23(-((far * near) / (far - near)));
+	perspective.E32(1.0f);
 
 	return perspective;
 }
@@ -327,14 +327,14 @@ Matrix Matrix::OrthogonalViewGL(const float left, const float right, const float
 	Matrix orthoView = Identity();
 
 	// Set the diagonal.
-	orthoView.a00(2.0f / (right - left));
-	orthoView.a11(2.0f / (top - bottom));
-	orthoView.a22(2.0f / (far - near));
+	orthoView.E00(2.0f / (right - left));
+	orthoView.E11(2.0f / (top - bottom));
+	orthoView.E22(2.0f / (far - near));
 
 	// Set the last column.
-	orthoView.a03(-1.0f * ((right + left) / (right - left)));
-	orthoView.a13(-1.0f * ((top + bottom) / (top - bottom)));
-	orthoView.a23(-1.0f * ((far + near) / (far - near)));
+	orthoView.E03(-1.0f * ((right + left) / (right - left)));
+	orthoView.E13(-1.0f * ((top + bottom) / (top - bottom)));
+	orthoView.E23(-1.0f * ((far + near) / (far - near)));
 
 	return orthoView;
 }
@@ -344,14 +344,14 @@ Matrix Matrix::OrthogonalViewDX(const float left, const float right, const float
 	Matrix orthoView = Identity();
 
 	// Set the diagonal.
-	orthoView.a00(2.0f / (right - left));
-	orthoView.a11(2.0f / (top - bottom));
-	orthoView.a22(1.0f / (far - near));
+	orthoView.E00(2.0f / (right - left));
+	orthoView.E11(2.0f / (top - bottom));
+	orthoView.E22(1.0f / (far - near));
 
 	// Set the last row.
-	orthoView.a30(-1.0f * ((right + left) / (right - left)));
-	orthoView.a31(-1.0f * ((top + bottom) / (top - bottom)));
-	orthoView.a32(-1.0f * (near / (far - near)));
+	orthoView.E30(-1.0f * ((right + left) / (right - left)));
+	orthoView.E31(-1.0f * ((top + bottom) / (top - bottom)));
+	orthoView.E32(-1.0f * (near / (far - near)));
 
 	return orthoView;
 }
@@ -408,24 +408,24 @@ float Matrix::Determinant() const
 	The results should be the same regardless of which row or column we choose.*/
 
 	// a*(fkp + gln + hjo - flo - gjp - hkn)
-	determinant = a00() * ((a11() * a22() * a33()) + (a12() * a23() * a31()) +
-		(a13() * a21() * a32()) - (a11() * a23() * a32()) -
-		(a12() * a21() * a33()) - (a13() * a22() * a31()));
+	determinant = mE00 * ((mE11 * mE22 * mE33) + (mE12 * mE23 * mE31) +
+		(mE13 * mE21 * mE32) - (mE11 * mE23 * mE32) -
+		(mE12 * mE21 * mE33) - (mE13 * mE22 * mE31));
 
 	// b*(ekp + glm + hio - elo - gip - hkm)
-	determinant -= a01() * ((a10() * a22() * a33()) + (a12() * a23() * a30()) +
-		(a13() * a20() * a32()) - (a10() * a23() * a32()) -
-		(a12() * a20() * a33()) - (a13() * a22() * a30()));
+	determinant -= mE01 * ((mE10 * mE22 * mE33) + (mE12 * mE23 * mE30) +
+		(mE13 * mE20 * mE32) - (mE10 * mE23 * mE32) -
+		(mE12 * mE20 * mE33) - (mE13 * mE22 * mE30));
 
 	// c*(ejp + flm + hin - eln - fip - hjm)
-	determinant += a02() * ((a10() * a21() * a33()) + (a11() * a23() * a30()) +
-		(a13() * a20() * a31()) - (a10() * a23() * a31()) -
-		(a11() * a20() * a33()) - (a13() * a21() * a30()));
+	determinant += mE02 * ((mE10 * mE21 * mE33) + (mE11 * mE23 * mE30) +
+		(mE13 * mE20 * mE31) - (mE10 * mE23 * mE31) -
+		(mE11 * mE20 * mE33) - (mE13 * mE21 * mE30));
 
 	// d*(ejo + fkm + gin - ekn - fio - gjm)
-	determinant -= a03() * ((a10() * a21() * a32()) + (a11() * a22() * a30()) +
-		(a12() * a20() * a31()) - (a10() * a22() * a31()) -
-		(a11() * a20() * a32()) - (a12() * a21() * a30()));
+	determinant -= mE03 * ((mE10 * mE21 * mE32) + (mE11 * mE22 * mE30) +
+		(mE12 * mE20 * mE31) - (mE10 * mE22 * mE31) -
+		(mE11 * mE20 * mE32) - (mE12 * mE21 * mE30));
 
 	return determinant;
 }
