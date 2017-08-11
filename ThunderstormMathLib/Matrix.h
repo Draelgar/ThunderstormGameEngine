@@ -48,6 +48,28 @@ namespace ts
 					mMatrix[i] = value; 
 			};
 
+			/** Create a new matrix with the given values.
+			*	\param e00 -The value at row zero, column zero.
+			*	\param e01 -The value at row zero, column one.
+			*	\param e02 -The value at row zero, column two.
+			*	\param e03 -The value at row zero, column three.
+			*	\param e10 -The value at row one, column zero.
+			*	\param e11 -The value at row one, column one.
+			*	\param e12 -The value at row one, column two.
+			*	\param e13 -The value at row one, column three.
+			*	\param e20 -The value at row two, column zero.
+			*	\param e21 -The value at row two, column one.
+			*	\param e22 -The value at row two, column two.
+			*	\param e23 -The value at row two, column three.
+			*	\param e30 -The value at row three, column zero.
+			*	\param e31 -The value at row three, column one.
+			*	\param e32 -The value at row three, column two.
+			*	\param e33 -The value at row three, column three. **/
+			explicit Matrix(const float e00, const float e01, const float e02, const float e03,
+							const float e10, const float e11, const float e12, const float e13,
+							const float e20, const float e21, const float e22, const float e23,
+							const float e30, const float e31, const float e32, const float e33);
+
 			/** Create a matrix by using the given vectors as rows.
 			*	\param a -The first row of the matrix.
 			*	\param b -The second row of the matrix.
@@ -250,6 +272,12 @@ namespace ts
 				result /= scalar;
 				return result;
 			};
+
+			/** Check if the two given matrices are equal. **/
+			bool operator==(const Matrix matrix) const;
+			
+			/** Check if the two given matrices are not equal. **/
+			bool operator!=(const Matrix matrix) const;
 
 			/** Divide the matrix by a scalar value. **/
 			void operator/=(const float scalar);

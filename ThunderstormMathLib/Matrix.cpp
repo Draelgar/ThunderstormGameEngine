@@ -54,6 +54,14 @@ void Matrix::LUDecomposition(float l[], float u[]) const
 	}
 }
 
+ts::math::Matrix::Matrix(const float e00, const float e01, const float e02, const float e03, const float e10, const float e11, const float e12, const float e13, const float e20, const float e21, const float e22, const float e23, const float e30, const float e31, const float e32, const float e33)
+{
+	mE00 = e00; mE01 = e01; mE02 = e02; mE03 = e03;
+	mE10 = e10; mE11 = e11; mE12 = e12; mE13 = e13;
+	mE20 = e20; mE21 = e21; mE22 = e22; mE23 = e23;
+	mE30 = e30; mE31 = e31; mE32 = e32; mE33 = e33;
+}
+
 Matrix::Matrix(const Float4 a, const Float4 b, const Float4 c, const Float4 d)
 {
 	for (unsigned short i = 0; i < 16; i++)
@@ -115,6 +123,30 @@ void Matrix::operator*=(const Matrix matrix)
 
 			Set(i, j, element); // set the matrix element.
 		}
+}
+
+bool ts::math::Matrix::operator==(const Matrix matrix) const
+{
+	return fabsf(mE00 - matrix.E00()) <= MATH_FLOAT_PRECISION && fabsf(mE01 - matrix.E01()) <= MATH_FLOAT_PRECISION && 
+					fabsf(mE02 - matrix.E02()) <= MATH_FLOAT_PRECISION && fabsf(mE03 - matrix.E03()) <= MATH_FLOAT_PRECISION &&
+		fabsf(mE10 - matrix.E10()) <= MATH_FLOAT_PRECISION && fabsf(mE11 - matrix.E11()) <= MATH_FLOAT_PRECISION &&
+					fabsf(mE12 - matrix.E12()) <= MATH_FLOAT_PRECISION && fabsf(mE13 - matrix.E13()) <= MATH_FLOAT_PRECISION &&
+		fabsf(mE20 - matrix.E20()) <= MATH_FLOAT_PRECISION && fabsf(mE21 - matrix.E21()) <= MATH_FLOAT_PRECISION &&
+					fabsf(mE22 - matrix.E22()) <= MATH_FLOAT_PRECISION && fabsf(mE23 - matrix.E23()) <= MATH_FLOAT_PRECISION &&
+		fabsf(mE30 - matrix.E30()) <= MATH_FLOAT_PRECISION && fabsf(mE31 - matrix.E31()) <= MATH_FLOAT_PRECISION &&
+					fabsf(mE32 - matrix.E32()) <= MATH_FLOAT_PRECISION && fabsf(mE33 - matrix.E33()) <= MATH_FLOAT_PRECISION;
+}
+
+bool ts::math::Matrix::operator!=(const Matrix matrix) const
+{
+	return fabsf(mE00 - matrix.E00()) > MATH_FLOAT_PRECISION && fabsf(mE01 - matrix.E01()) > MATH_FLOAT_PRECISION &&
+					fabsf(mE02 - matrix.E02()) > MATH_FLOAT_PRECISION && fabsf(mE03 - matrix.E03()) > MATH_FLOAT_PRECISION &&
+		fabsf(mE10 - matrix.E10()) > MATH_FLOAT_PRECISION && fabsf(mE11 - matrix.E11()) > MATH_FLOAT_PRECISION &&
+					fabsf(mE12 - matrix.E12()) > MATH_FLOAT_PRECISION && fabsf(mE13 - matrix.E13()) > MATH_FLOAT_PRECISION &&
+		fabsf(mE20 - matrix.E20()) > MATH_FLOAT_PRECISION && fabsf(mE21 - matrix.E21()) > MATH_FLOAT_PRECISION &&
+					fabsf(mE22 - matrix.E22()) > MATH_FLOAT_PRECISION && fabsf(mE23 - matrix.E23()) > MATH_FLOAT_PRECISION &&
+		fabsf(mE30 - matrix.E30()) > MATH_FLOAT_PRECISION && fabsf(mE31 - matrix.E31()) > MATH_FLOAT_PRECISION &&
+					fabsf(mE32 - matrix.E32()) > MATH_FLOAT_PRECISION && fabsf(mE33 - matrix.E33()) > MATH_FLOAT_PRECISION;
 }
 
 void Matrix::operator/=(const float scalar)
@@ -402,9 +434,9 @@ float Matrix::Determinant() const
 					 |m n o p|
 
 	Then its determinant is a subset of any row or column in A and the determinant sum of the remaining 3x3 matrices.
-	For example. if we take row 1, we get: determinant =  |f g h|    |e g h|	|e f h|	   |e f g|
-														 a|j k l| - b|i k l| + c|i j l| - d|i j k|
-														  |n o p|	 |m o p|	|m n p|	   |m n o|
+	If we take row 1, we get: determinant =  |f g h|    |e g h|	   |e f h|	  |e f g|
+											a|j k l| - b|i k l| + c|i j l| - d|i j k|
+											 |n o p|	|m o p|	   |m n p|	  |m n o|
 	The results should be the same regardless of which row or column we choose.*/
 
 	// a*(fkp + gln + hjo - flo - gjp - hkn)

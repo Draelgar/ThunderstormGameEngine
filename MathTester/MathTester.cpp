@@ -7,6 +7,7 @@
 #include "Float2Tester.h"
 #include "Float3Tester.h"
 #include "Float4Tester.h"
+#include "MatrixTester.h"
 
 #include <iostream>
 
@@ -22,6 +23,7 @@ int main()
 	Float2Tester float2Tester;
 	Float3Tester float3Tester;
 	Float4Tester float4Tester;
+	MatrixTester matrixTester;
 
 	if (float2Tester.RunTests())
 		passed++;
@@ -38,6 +40,13 @@ int main()
 	cout << "-----------------------------------------------" << endl;
 
 	if (float4Tester.RunTests())
+		passed++;
+	else
+		failed++;
+
+	cout << "-----------------------------------------------" << endl;
+
+	if (matrixTester.RunTests())
 		passed++;
 	else
 		failed++;
