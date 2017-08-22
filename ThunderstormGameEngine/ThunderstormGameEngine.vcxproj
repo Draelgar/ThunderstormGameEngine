@@ -150,12 +150,12 @@
     <ClCompile Include="CameraNode.cpp" />
     <ClCompile Include="DX3D11Renderer.cpp" />
     <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="GeometryIndexedColour.cpp" />
     <ClCompile Include="GeometryNode.cpp" />
     <ClCompile Include="GraphicsManager.cpp" />
     <ClCompile Include="GroupNode.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ProcessVisitor.cpp" />
+    <ClCompile Include="NodeVisitor.cpp" />
     <ClCompile Include="SceneGraphNode.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -166,16 +166,17 @@
     <ClCompile Include="TransformNode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseGeometry.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraNode.h" />
     <ClInclude Include="ControlManager.h" />
     <ClInclude Include="DX3D11Renderer.h" />
     <ClInclude Include="GameManager.h" />
-    <ClInclude Include="Geometry.h" />
+    <ClInclude Include="GeometryIndexedColour.h" />
     <ClInclude Include="GeometryNode.h" />
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="GroupNode.h" />
-    <ClInclude Include="ProcessVisitor.h" />
+    <ClInclude Include="NodeVisitor.h" />
     <ClInclude Include="SceneGraphNode.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shader.h" />

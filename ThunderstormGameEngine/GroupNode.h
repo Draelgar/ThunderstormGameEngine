@@ -12,34 +12,26 @@ namespace ts
 	namespace scene
 	{
 		class SceneGraphNode;
-		class ProcessVisitor;
+		class NodeVisitor;
 
 		class GroupNode : public SceneGraphNode
 		{
 		protected:
 			std::vector<std::shared_ptr<SceneGraphNode>> mChildren;
-			unsigned int mNextChildIndex;
 
 		public:
+			/** Create a new group node with the default name "Group". **/
 			GroupNode();
 
-			GroupNode(unsigned int iNumber);
+			/** Create a new group node with the given name. **/
+			explicit GroupNode(std::string iName);
 
-			GroupNode(std::string iName);
-
-			void AcceptVisitor(std::shared_ptr<ProcessVisitor> iVisitor);
-
-			/** Get the specified child node. **/
-			std::shared_ptr<SceneGraphNode> GetChild(unsigned int index);
+			/** Accept a node visitor. **/
+			void AcceptVisitor(std::shared_ptr<NodeVisitor> visitor);
 
 			/** Look for a node by the given name. **/
-			std::shared_ptr<SceneGraphNode> GetNamedNode(std::string name);
+			std::shared_ptr<SceneGraphNode> Find(std::string name);
 
-			/** Get the next child node. **/
-			std::shared_ptr<SceneGraphNode> GetNextChild();
-
-			/** Reset child counter. **/
-			void ResetChildCounter();
 		};
 	}
 }

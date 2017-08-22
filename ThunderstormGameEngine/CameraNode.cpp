@@ -8,20 +8,27 @@
 using namespace ts::scene;
 
 CameraNode::CameraNode(bool orthogonal) :
-	GroupNode()
+	SceneGraphNode("Camera")
 {
 	// TODO: allow the camera to setup orthogonal view!
-	mName = "Camera";
 }
 
-CameraNode::CameraNode(std::string iName, bool orthogonal)
+CameraNode::CameraNode(std::string name, bool orthogonal) :
+	SceneGraphNode(name)
 {
 	// TODO: allow the camera to setup orthogonal view!
-	mName = iName;
 }
 
-void CameraNode::AcceptVisitor(std::shared_ptr<ProcessVisitor> iVisitor)
+void CameraNode::AcceptVisitor(std::shared_ptr<NodeVisitor> visitor)
 {
 	// Instruct the visitor on how to treat this object.
-	iVisitor->ProcessCameraNode(std::shared_ptr<CameraNode>(this));
+	visitor->ProcessCameraNode(std::shared_ptr<CameraNode>(this));
+}
+
+std::shared_ptr<SceneGraphNode> ts::scene::CameraNode::Find(std::string name)
+{
+	if (mName == name)
+		return std::shared_ptr<SceneGraphNode>(this);
+
+	return NULL;
 }

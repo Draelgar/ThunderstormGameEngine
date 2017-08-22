@@ -6,12 +6,7 @@
 
 using namespace ts::scene;
 
-SceneGraphNode::SceneGraphNode()
+SceneGraphNode::SceneGraphNode(std::string name)
 {
-
-}
-
-SceneGraphNode::SceneGraphNode(std::string iName)
-{
-	mName = iName;
+	mName = name;
 }

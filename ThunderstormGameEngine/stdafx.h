@@ -13,4 +13,4 @@
 #include "TransformNode.h"
 #include "CameraNode.h"
 #include "GeometryNode.h"
-#include "ProcessVisitor.h"
+#include "NodeVisitor.h"

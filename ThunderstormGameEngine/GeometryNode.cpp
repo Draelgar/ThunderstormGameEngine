@@ -8,25 +8,25 @@
 
 using namespace ts::scene;
 
-void GeometryNode::AcceptVisitor(std::shared_ptr<ProcessVisitor> iVisitor)
+ts::scene::GeometryNode::GeometryNode() :
+	SceneGraphNode("Geometry")
 {
 }
 
-std::shared_ptr<SceneGraphNode> GeometryNode::GetChild(unsigned int index)
+ts::scene::GeometryNode::GeometryNode(std::string name) :
+	SceneGraphNode(name)
 {
+}
+
+void GeometryNode::AcceptVisitor(std::shared_ptr<NodeVisitor> visitor)
+{
+	visitor->ProcessGeometryNode(std::shared_ptr<GeometryNode>(this));
+}
+
+std::shared_ptr<SceneGraphNode> GeometryNode::Find(std::string name)
+{
+	if (mName == name)
+		return std::shared_ptr<SceneGraphNode>(this);
+
 	return NULL;
-}
-
-std::shared_ptr<SceneGraphNode> GeometryNode::GetNamedNode(std::string name)
-{
-	return NULL;
-}
-
-std::shared_ptr<SceneGraphNode> GeometryNode::GetNextChild()
-{
-	return NULL;
-}
-
-void GeometryNode::ResetChildCounter()
-{
 }

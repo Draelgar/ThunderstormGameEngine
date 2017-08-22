@@ -5,33 +5,41 @@
 #pragma once
 
 #include "stdafx.h"
+#include "Matrix.h"
 
 namespace ts
 {
 	namespace scene
 	{
-		class ProcessVisitor;
+		class NodeVisitor;
 
 		/** This node contains a matrix representing the translation of all chils nodes. **/
 		class TransformNode : public GroupNode
 		{
 		protected:
-			DirectX::XMMATRIX mTransformMatrix;
+			 math::Matrix mTransformMatrix;
 
 		public:
+			/** Create a new transform node with the name "Transform" **/
 			TransformNode();
-			TransformNode(unsigned int index);
-			TransformNode(std::string name);
 
-			void AcceptVisitor(std::shared_ptr<ProcessVisitor> iVisitor) override;
+			/** Create a new transform node with the given name. **/
+			explicit TransformNode(std::string name);
 
-			DirectX::XMMATRIX GetTransform();
+			/** Accept a node visitor. **/
+			void AcceptVisitor(std::shared_ptr<NodeVisitor> visitor) override;
 
-			void Translate(DirectX::XMFLOAT3 translation);
+			/** Get the transformmatrix. **/
+			math::Matrix GetTransform();
 
-			void Rotate(DirectX::XMVECTOR rotation);
+			/** Translate the transformmatrix. **/
+			void Translate(math::Float3 translation);
 
-			void Scale(DirectX::XMFLOAT3 scale);
+			/** Rotate the transformmatrix. **/
+			void Rotate(math::Float4 rotation);
+
+			/** Scale the transformmatrix. **/
+			void Scale(math::Float3 scale);
 
 		};
 	}

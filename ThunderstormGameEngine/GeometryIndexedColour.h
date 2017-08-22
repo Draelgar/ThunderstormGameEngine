@@ -3,21 +3,23 @@
 ** Date: 2017-02-09
 ****************************************************************/
 #pragma once
+#include "BaseGeometry.h"
+
 #include <d3d11.h>
-#include <directxmath.h>
+#include "Float4.h"
 
 namespace ts
 {
 	namespace graphics
 	{
-		/** This class is intended as base class for different types of geometries. **/
-		class Geometry
+		/** This class defines a geometry of indexed and coloured vertices. **/
+		class GeometryIndexedColour : public BaseGeometry
 		{
 		private:
 			struct VertexType
 			{
-				DirectX::XMFLOAT3 position;
-				DirectX::XMFLOAT4 color;
+				math::Float3 position;
+				math::Float4 color;
 			};
 
 			ID3D11Buffer *mVertexBuffer, *mIndexBuffer;
@@ -29,9 +31,8 @@ namespace ts
 			void RenderBuffers(ID3D11DeviceContext* devCon);
 
 		public:
-			Geometry();
-			Geometry(const Geometry& geometry);
-			~Geometry();
+			GeometryIndexedColour();
+			~GeometryIndexedColour();
 
 			bool Initialize(ID3D11Device* device);
 			void Shutdown();

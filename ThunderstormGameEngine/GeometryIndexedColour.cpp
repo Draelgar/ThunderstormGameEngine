@@ -1,15 +1,16 @@
 /***************************************************************
-** Author: Peter Hultgren
+** Author: Gustaf Peter Hultgren
 ** Date: 2017-02-09
 ****************************************************************/
 
 #include "stdafx.h"
-#include "Geometry.h"
+#include "GeometryIndexedColour.h"
 
 using namespace ts::graphics;
+using namespace ts::math;
 using namespace DirectX;
 
-bool Geometry::InitializeBuffers(ID3D11Device * device)
+bool GeometryIndexedColour::InitializeBuffers(ID3D11Device * device)
 {
 	VertexType* vertices;
 	unsigned long* indices;
@@ -38,14 +39,14 @@ bool Geometry::InitializeBuffers(ID3D11Device * device)
 	}
 
 	// Load the vertex array with data.
-	vertices[0].position = XMFLOAT3(-1.0f, -1.0f, 0.0f);  // Bottom left.
-	vertices[0].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+	vertices[0].position = Float3(-1.0f, -1.0f, 0.0f);  // Bottom left.
+	vertices[0].color = Float4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[1].position = XMFLOAT3(0.0f, 1.0f, 0.0f);  // Top middle.
-	vertices[1].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+	vertices[1].position = Float3(0.0f, 1.0f, 0.0f);  // Top middle.
+	vertices[1].color = Float4(0.0f, 1.0f, 0.0f, 1.0f);
 
-	vertices[2].position = XMFLOAT3(1.0f, -1.0f, 0.0f);  // Bottom right.
-	vertices[2].color = XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+	vertices[2].position = Float3(1.0f, -1.0f, 0.0f);  // Bottom right.
+	vertices[2].color = Float4(0.0f, 1.0f, 0.0f, 1.0f);
 
 	// Load the index array with data.
 	indices[0] = 0;  // Bottom left.
@@ -102,7 +103,7 @@ bool Geometry::InitializeBuffers(ID3D11Device * device)
 	return true;
 }
 
-void Geometry::ShutdownBuffers()
+void GeometryIndexedColour::ShutdownBuffers()
 {
 
 	// Release the index buffer.
@@ -120,7 +121,7 @@ void Geometry::ShutdownBuffers()
 	}
 }
 
-void Geometry::RenderBuffers(ID3D11DeviceContext * devCon)
+void GeometryIndexedColour::RenderBuffers(ID3D11DeviceContext * devCon)
 {
 	unsigned int stride;
 	unsigned int offset;
@@ -139,23 +140,18 @@ void Geometry::RenderBuffers(ID3D11DeviceContext * devCon)
 	devCon->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
-Geometry::Geometry()
+GeometryIndexedColour::GeometryIndexedColour()
 {
 	mVertexBuffer = NULL;
 	mIndexBuffer = NULL;
 }
 
-Geometry::Geometry(const Geometry& geometry)
+GeometryIndexedColour::~GeometryIndexedColour()
 {
 
 }
 
-Geometry::~Geometry()
-{
-
-}
-
-bool Geometry::Initialize(ID3D11Device * device)
+bool GeometryIndexedColour::Initialize(ID3D11Device * device)
 {
 	// Initialize the vertex and index buffers.
 	if (!InitializeBuffers(device))
@@ -166,7 +162,7 @@ bool Geometry::Initialize(ID3D11Device * device)
 	return true;
 }
 
-void Geometry::Shutdown()
+void GeometryIndexedColour::Shutdown()
 {
 	// Shutdown the vertex and index buffers.
 	ShutdownBuffers();
@@ -174,7 +170,7 @@ void Geometry::Shutdown()
 	return;
 }
 
-void Geometry::Render(ID3D11DeviceContext * devCon)
+void GeometryIndexedColour::Render(ID3D11DeviceContext * devCon)
 {
 	// Put the vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	RenderBuffers(devCon);
@@ -182,7 +178,7 @@ void Geometry::Render(ID3D11DeviceContext * devCon)
 	return;
 }
 
-int Geometry::GetIndexCount()
+int GeometryIndexedColour::GetIndexCount()
 {
 	return mIndexCount;
 }

@@ -15,19 +15,23 @@ namespace ts
 			At least 1 node is required within the scene graph and
 			any additional ones will cause the scene to draw once again
 			for each addidional camera. **/
-		class CameraNode : public scene::GroupNode
+		class CameraNode : public scene::SceneGraphNode
 		{
 		private:
 			graphics::Camera mCamera;
 
 		public:
-			CameraNode(bool orthogonal = false);
+			/** Create a new camera node with the default "Camera" name. **/
+			explicit CameraNode(bool orthogonal = false);
 
-			CameraNode(std::string iName, bool orthogonal = false);
+			/** Create a new camera node with the given name. **/
+			explicit CameraNode(std::string name, bool orthogonal = false);
 
 			/** Accept a visitor.**/
-			void AcceptVisitor(std::shared_ptr<scene::ProcessVisitor> iVisitor) override;
+			void AcceptVisitor(std::shared_ptr<scene::NodeVisitor> visitor);
 
+			/** Look for a node by the given name. **/
+			std::shared_ptr<SceneGraphNode> Find(std::string name);
 		};
 	}
 }

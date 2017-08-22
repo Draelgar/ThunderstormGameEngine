@@ -6,7 +6,7 @@
 
 #include "DX3D11Renderer.h"
 #include "Camera.h"
-#include "Geometry.h"
+#include "GeometryIndexedColour.h"
 #include "Shader.h"
 
 namespace ts
@@ -23,7 +23,7 @@ namespace ts
 
 			DX3D11Renderer mDX3D11Rend;
 			std::unique_ptr<Camera> mCamera;
-			std::unique_ptr<Geometry> mGeometry;
+			std::unique_ptr<GeometryIndexedColour> mGeometry;
 			std::unique_ptr<Shader> mShader;
 
 		private:

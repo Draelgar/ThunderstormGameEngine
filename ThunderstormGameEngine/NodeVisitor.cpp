@@ -6,7 +6,7 @@
 
 using namespace ts::scene;
 
-ProcessVisitor::ProcessVisitor()
+NodeVisitor::NodeVisitor()
 {
 
 }

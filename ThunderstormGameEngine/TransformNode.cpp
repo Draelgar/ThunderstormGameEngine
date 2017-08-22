@@ -3,56 +3,50 @@
 ** Date: 2017-02-11
 ****************************************************************/
 #include "stdafx.h"
-using namespace DirectX;
+
 using namespace ts::scene;
+using namespace ts::math;
 
 TransformNode::TransformNode() :
-	GroupNode()
+	GroupNode("Transform")
 {
 	// Create a clean identity matrix as no transformation has taken place yet.
-	mTransformMatrix = XMMatrixIdentity();
-	mName = "TranslationNode";
-}
-
-TransformNode::TransformNode(unsigned int index) :
-	GroupNode()
-{
-	// Create a clean identity matrix as no transformation has taken place yet.
-	mTransformMatrix = XMMatrixIdentity();
-	mName = "TranslationNode " + index;
+	mTransformMatrix = Matrix::Identity();
 }
 
 TransformNode::TransformNode(std::string name) :
-	GroupNode()
+	GroupNode(name)
 {
 	// Create a clean identity matrix as no transformation has taken place yet.
-	mTransformMatrix = XMMatrixIdentity();
-	mName = name;
+	mTransformMatrix = Matrix::Identity();
 }
 
-void TransformNode::AcceptVisitor(std::shared_ptr<ProcessVisitor> iVisitor)
+void TransformNode::AcceptVisitor(std::shared_ptr<NodeVisitor> visitor)
 {
-	iVisitor->ProcessTransformNode((std::shared_ptr<TransformNode>)this);
+	visitor->ProcessTransformNode((std::shared_ptr<TransformNode>)this);
+
+	// The group node will update the child nodes.
+	GroupNode::AcceptVisitor(visitor);
 }
 
-DirectX::XMMATRIX TransformNode::GetTransform()
+Matrix TransformNode::GetTransform()
 {
 	return mTransformMatrix;
 }
 
-void TransformNode::Translate(XMFLOAT3 translation)
+void TransformNode::Translate(Float3 translation)
 {
-	mTransformMatrix = XMMatrixTranslation(translation.x, translation.y, translation.z);
+	mTransformMatrix.TranslateDX(translation);
 }
 
-void TransformNode::Rotate(XMVECTOR quaternion)
+void TransformNode::Rotate(Float4 rotation)
 {
-	mTransformMatrix = XMMatrixRotationQuaternion(quaternion);
+	mTransformMatrix.Rotate(rotation);
 }
 
-void TransformNode::Scale(XMFLOAT3 scale)
+void TransformNode::Scale(Float3 scale)
 {
-	mTransformMatrix = XMMatrixScaling(scale.x, scale.y, scale.z);
+	mTransformMatrix.Scale(scale);
 }
 
 

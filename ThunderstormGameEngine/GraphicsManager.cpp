@@ -74,7 +74,7 @@ bool GraphicsManager::Initialize(int iWidth, int iHeight, HWND iHwnd)
 	}
 
 	// Create the model object.
-	mGeometry = std::unique_ptr<Geometry>(new Geometry);
+	mGeometry = std::unique_ptr<GeometryIndexedColour>(new GeometryIndexedColour);
 	if(!mGeometry)
 	{
 		return false;

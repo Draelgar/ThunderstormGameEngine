@@ -4,33 +4,36 @@
 ****************************************************************/
 #pragma once
 
+#include "BaseGeometry.h"
 #include "SceneGraphNode.h"
-#include "Geometry.h"
 
 namespace ts
 {
+	class BaseGeometry;
+
 	namespace scene
 	{
 		/** This class handles the actual geometry of a 3D object. **/
 		class GeometryNode : public SceneGraphNode
 		{
 		private:
+			/** The actual geometry of this node. **/
+			std::shared_ptr<BaseGeometry> mGeometry;
+
+			// TODO: Add material as well.
 
 		public:
+			/** Create a new geometry node with the default name "Geometry". **/
+			GeometryNode();
+
+			/** Create a new geometry node with the given name. **/
+			explicit GeometryNode(std::string name);
+
 			/** Accept a visitor.**/
-			void AcceptVisitor(std::shared_ptr<ProcessVisitor> iVisitor);
+			void AcceptVisitor(std::shared_ptr<NodeVisitor> visitor);
 
-			/** Inherited interface function, returns NULL as this class has no child nodes. **/
-			std::shared_ptr<SceneGraphNode> GetChild(unsigned int index);
-
-			/** Inherited interface function, returns NULL as this class has no child nodes. **/
-			std::shared_ptr<SceneGraphNode> GetNamedNode(std::string name);
-
-			/** Inherited interface function, returns NULL as this class has no child nodes. **/
-			std::shared_ptr<SceneGraphNode> GetNextChild();
-
-			/** Inherited interface function, does nothing as this class has no child nodes. **/
-			void ResetChildCounter();
+			/** Return this node if it has the same name, else Null. **/
+			std::shared_ptr<SceneGraphNode> Find(std::string name);
 		};
 	}
 }

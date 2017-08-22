@@ -51,17 +51,11 @@
     <ClCompile Include="DX3D11Renderer.cpp">
       <Filter>Source Files\Graphics Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Geometry.cpp">
-      <Filter>Source Files\Graphics Engine</Filter>
-    </ClCompile>
     <ClCompile Include="GraphicsManager.cpp">
       <Filter>Source Files\Graphics Engine</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files\Graphics Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="ProcessVisitor.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SceneGraphNode.cpp">
       <Filter>Source Files\Scene Graph Nodes</Filter>
@@ -77,6 +71,12 @@
     </ClCompile>
     <ClCompile Include="GeometryNode.cpp">
       <Filter>Source Files\Scene Graph Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="NodeVisitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryIndexedColour.cpp">
+      <Filter>Source Files\Graphics Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -98,17 +98,11 @@
     <ClInclude Include="DX3D11Renderer.h">
       <Filter>Header Files\Graphics Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Geometry.h">
-      <Filter>Header Files\Graphics Engine</Filter>
-    </ClInclude>
     <ClInclude Include="GraphicsManager.h">
       <Filter>Header Files\Graphics Engine</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Header Files\Graphics Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="ProcessVisitor.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SceneGraphNode.h">
       <Filter>Header Files\Scene Graph Nodes</Filter>
@@ -127,6 +121,15 @@
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeVisitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryIndexedColour.h">
+      <Filter>Header Files\Graphics Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseGeometry.h">
+      <Filter>Header Files\Graphics Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
