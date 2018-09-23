@@ -17,9 +17,6 @@ namespace ts
 		/** A base class for all visitor objects that will process the data of the scene graph nodes. **/
 		class NodeVisitor
 		{
-		protected:
-			NodeVisitor();
-
 		public:
 			/** Process a node containing geometric data of a graphical object. **/
 			virtual void ProcessGeometryNode(std::shared_ptr<GeometryNode> geometryNode) = 0;

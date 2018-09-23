@@ -7,16 +7,10 @@
 
 using namespace ts::scene;
 
-CameraNode::CameraNode(bool orthogonal) :
-	SceneGraphNode("Camera")
-{
-	// TODO: allow the camera to setup orthogonal view!
-}
-
-CameraNode::CameraNode(std::string name, bool orthogonal) :
+CameraNode::CameraNode(std::string name, ts::graphics::Camera camera) :
 	SceneGraphNode(name)
 {
-	// TODO: allow the camera to setup orthogonal view!
+	mCamera = camera;
 }
 
 void CameraNode::AcceptVisitor(std::shared_ptr<NodeVisitor> visitor)

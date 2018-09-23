@@ -78,6 +78,9 @@
     <ClCompile Include="GeometryIndexedColour.cpp">
       <Filter>Source Files\Graphics Engine</Filter>
     </ClCompile>
+    <ClCompile Include="RenderNodeVisitor.cpp">
+      <Filter>Source Files\Graphics Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h">
@@ -129,6 +132,9 @@
       <Filter>Header Files\Graphics Engine</Filter>
     </ClInclude>
     <ClInclude Include="BaseGeometry.h">
+      <Filter>Header Files\Graphics Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderNodeVisitor.h">
       <Filter>Header Files\Graphics Engine</Filter>
     </ClInclude>
   </ItemGroup>

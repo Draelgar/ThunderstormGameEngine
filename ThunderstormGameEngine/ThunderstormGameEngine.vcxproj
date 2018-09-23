@@ -156,6 +156,7 @@
     <ClCompile Include="GroupNode.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NodeVisitor.cpp" />
+    <ClCompile Include="RenderNodeVisitor.cpp" />
     <ClCompile Include="SceneGraphNode.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="GraphicsManager.h" />
     <ClInclude Include="GroupNode.h" />
     <ClInclude Include="NodeVisitor.h" />
+    <ClInclude Include="RenderNodeVisitor.h" />
     <ClInclude Include="SceneGraphNode.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shader.h" />

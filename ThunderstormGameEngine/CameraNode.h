@@ -21,11 +21,8 @@ namespace ts
 			graphics::Camera mCamera;
 
 		public:
-			/** Create a new camera node with the default "Camera" name. **/
-			explicit CameraNode(bool orthogonal = false);
-
 			/** Create a new camera node with the given name. **/
-			explicit CameraNode(std::string name, bool orthogonal = false);
+			explicit CameraNode(std::string name, graphics::Camera camera);
 
 			/** Accept a visitor.**/
 			void AcceptVisitor(std::shared_ptr<scene::NodeVisitor> visitor);

@@ -10,7 +10,7 @@ using namespace ts::graphics;
 
 bool GraphicsManager::Render()
 {
-	XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
+	/*XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
 	bool result;
 
 	// Clear the buffers to begin the scene.
@@ -37,7 +37,7 @@ bool GraphicsManager::Render()
 	}
 
 	// Present the rendered scene to the screen.
-	mDX3D11Rend.EndScene();
+	mDX3D11Rend.EndScene();*/
 
 	return true;
 }
